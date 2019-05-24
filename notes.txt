@@ -1,0 +1,11 @@
+How to solve a problem:
+{
+ 0: Don't Panic,
+ 1: What are the inputs?,
+ 2: What are the outputs?,
+ 3: Work through some examples by hand (future test cases),
+ 4: Simple mechanical solution,
+ 5: Develop incrementally and test as you go
+}
+
+Don't optimize prematurely!
