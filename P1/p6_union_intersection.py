@@ -125,16 +125,3 @@ test4_result = intersection(linked_list_3, linked_list_4)
 
 print ("Pass" if (str(test3_result) == test3_answer) else "Fail")
 print ("Pass" if (str(test4_result) == "") else "Fail")
-
-
-# Big O Notation
-# The `union` function has two while loops, one for each linked list.
-# Therefor its performance is Big O of N times 2: O(2n) or O(n).
-
-# The `intersection` function has a loop within a loop, checking for
-# identical values in either list. It's performance is thus a bit worse
-# at Big O of N squared: O(n**2).
-
-# In both functions I use Python's `set` function to create a unique cache list
-# of either the union or intersection of the items in both lists. This adds another
-# loop for iterating thru the final set, but it's effect on performance is minimal.

@@ -24,3 +24,10 @@ def find_files(suffix, path):
                 find_files(suffix, os.path.join(path, file))
 
 find_files(".c", "./testdir")
+# Test Case
+# expected output:
+
+# ./testdir/subdir3/subsubdir1/b.c
+# ./testdir/t1.c
+# ./testdir/subdir5/a.c
+# ./testdir/subdir1/a.c

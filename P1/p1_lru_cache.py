@@ -74,11 +74,21 @@ class LRU_Cache:
         self.list.prepend(key)
         self.dictionary[key] = value
 
-our_cache = LRU_Cache(3)
 
+# Test Cases
+our_cache = LRU_Cache(3)
 our_cache.set(1, 1)
 our_cache.set(2, 2)
 our_cache.set(3, 3)
-our_cache.get(1)       # returns 1
-our_cache.get(2)       # returns 2
-our_cache.get(3)       # return -1
+
+a = our_cache.get(1)
+print(a)
+# returns 1
+
+b = our_cache.get(2)
+print(b)
+# returns 2
+
+c = our_cache.get(4)
+print(c)
+# returns -1

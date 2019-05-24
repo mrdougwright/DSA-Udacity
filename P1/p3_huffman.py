@@ -54,7 +54,7 @@ def huffman_decoding(data, tree):
 
     return ''.join(decodedLetters)
 
-    
+
 if __name__ == "__main__":
     codes = {}
 
@@ -72,3 +72,8 @@ if __name__ == "__main__":
 
     print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
     print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+# Test Case
+# Expect binary string and size:
+# The size of the encoded data is: 44
+# The size of the decoded data is: 69
