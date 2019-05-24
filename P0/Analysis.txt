@@ -1,0 +1,51 @@
+Analysis using Big O Notation
+
+Task0
+With each function accessing a specific item in the array
+using an index or negative one, each function performs only
+on operation, regardless of input size (n).
+O(0n + 1) + O(0n + 1)
+O(0n + 2)
+
+Answer:
+O(1)
+---------------
+
+Task1
+This task uses one main function, combining texts and calls into
+one array of records (operation 1). We create a set (operation 2)
+and begin looping over our records. Inside the loop we perform 4
+operations and finally return the length. Our final Big O is then
+O(1n + 6), simplified to O(n).
+
+Answer:
+O(n)
+---------------
+
+Task2
+Since the second for loop only looks at a max of 2 numbers (info[0:2]),
+this function is not exactly n^2, since only the first n is dependent
+on input size. Total operations outside the loop: 3. Operations inside
+the loop: 6. Our notation is thus O(1n + 9) or simply O(n).
+
+Answer:
+O(n)
+---------------
+
+Task3
+Counting operations we get 15. We loop over our input twice, but also
+perform a sort operation. So our Big O notation might look like
+O(2n + 15) + O(n log n), simplified to O(n log n).
+
+Answer:
+O(n log n)
+---------------
+
+Task 4
+With 7 operations, 4 for loops and 1 python sort operation (n log n),
+our notation might look like: O(4n + 7) + O(n log n). Simplified to
+O(n log n).
+
+Answer:
+O(n log n)
+---------------
