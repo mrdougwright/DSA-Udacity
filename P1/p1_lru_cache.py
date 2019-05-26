@@ -76,19 +76,25 @@ class LRU_Cache:
 
 
 # Test Cases
-our_cache = LRU_Cache(3)
+our_cache = LRU_Cache(5)
 our_cache.set(1, 1)
 our_cache.set(2, 2)
 our_cache.set(3, 3)
+our_cache.set(5, "Not a number")
+our_cache.set(None, 42)
 
-a = our_cache.get(1)
-print(a)
+
+print(our_cache.get(1))
 # returns 1
 
-b = our_cache.get(2)
-print(b)
+print(our_cache.get(2))
 # returns 2
 
-c = our_cache.get(4)
-print(c)
+print(our_cache.get(4))
+# returns -1
+
+print(our_cache.get(5))
+# returns "Not a number"
+
+print(our_cache.get(6))
 # returns -1

@@ -125,3 +125,24 @@ test4_result = intersection(linked_list_3, linked_list_4)
 
 print ("Pass" if (str(test3_result) == test3_answer) else "Fail")
 print ("Pass" if (str(test4_result) == "") else "Fail")
+
+
+# Test case 3
+
+linked_list5 = LinkedList()
+linked_list6 = LinkedList()
+
+element_1 = [None,2,3,4]
+element_2 = [1,2,3,5,7,9]
+
+for i in element_1:
+    linked_list5.append(i)
+
+for i in element_2:
+    linked_list6.append(i)
+
+test5_result = union(linked_list5, linked_list6)
+test5_answer = "1 -> 2 -> 3 -> 4 -> 5 -> 7 -> 9 -> None -> "
+test6_result = intersection(linked_list5, linked_list6)
+print ("Pass" if (str(test5_result) == test5_answer) else "Fail")
+print ("Pass" if (str(test6_result) == "2 -> 3 -> ") else "Fail")

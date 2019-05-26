@@ -22,6 +22,9 @@ class BlockChain:
         self.size = 0
 
     def append(self, value):
+        if value is None:
+            return
+
         self.size += 1
         node = self.head
 
@@ -38,6 +41,7 @@ chain = BlockChain()
 chain.append('data for a')
 chain.append('data for b')
 chain.append('data for c')
+chain.append(None)
 
 print(chain.head.data)
 # data for a
