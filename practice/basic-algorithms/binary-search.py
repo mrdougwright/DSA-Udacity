@@ -17,7 +17,7 @@ def binary_search(array, target):
 def binary_search_recursive(array, target):
     middle = len(array) // 2
     if target == array[middle]:
-        return target
+        return middle
     elif len(array) == 1:
         return -1
     elif target < array[middle]:
@@ -42,7 +42,7 @@ def recursive_binary_search(target, source, left=0):
 
 
 def find_first(target, source):
-    index = recursive_binary_search(target, source)
+    index = binary_search_recursive(source, target)
     if not index:
         return None
     while source[index] == target:
@@ -62,3 +62,14 @@ def contains(target, source):
     #     else:
     #         continue
     # return False
+
+
+def first_and_last_index(arr, number):
+    index = find_first(number, arr)
+    last_index = index
+    while arr[last_index] == number:
+        last_index += 1
+    return [index, last_index - 1]
+
+ans = first_and_last_index([0, 1, 2, 2, 3, 3, 3, 4, 5, 6], 3)
+print(ans)
