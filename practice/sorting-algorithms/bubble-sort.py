@@ -15,14 +15,13 @@ def bubble_sort_1(l):
             this = l[index]
             prev = l[index - 1]
 
-            if prev <= this:
-                continue
-
-            l[index] = prev
-            l[index - 1] = this
+            if this < prev:
+                l[index] = prev
+                l[index - 1] = this
 
 
 bubble_sort_1(wakeup_times)
+print(wakeup_times)
 print("Pass" if (wakeup_times[0] == 3) else "Fail")
 
 
@@ -36,21 +35,20 @@ def bubble_sort_2(l):
             this_hour, this_min = l[index]
             prev_hour, prev_min = l[index - 1]
 
-            if prev_hour > this_hour or (
-                prev_hour == this_hour and prev_min > this_min
+            if this_hour < prev_hour or (
+                prev_hour == this_hour and this_min < prev_min
             ):
-                continue
-
-            l[index] = (prev_hour, prev_min)
-            l[index - 1] = (this_hour, this_min)
+                l[index] = (prev_hour, prev_min)
+                l[index - 1] = (this_hour, this_min)
 
 
 bubble_sort_2(sleep_times)
+print(sleep_times)
 print(
     "Pass"
     if (
         sleep_times
-        == [(24, 23), (24, 13), (24, 3), (23, 20), (22, 5), (21, 58), (21, 55)]
+        == [(21, 55), (21, 58), (22, 5), (23, 20), (24, 3), (24, 13), (24, 23)]
     )
     else "Fail"
 )
