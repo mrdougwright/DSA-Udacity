@@ -13,6 +13,9 @@ def mergesort(items):
     right = items[mid_index:]
 
     # Call mergesort recursively with the left and right half
+    print(f"left: {left}")
+    print(f"right: {right}")
+    print("--------------")
     left = mergesort(left)
     right = mergesort(right)
 
@@ -35,7 +38,7 @@ def merge(left, right):
 
     merged += left[left_index:]
     merged += right[right_index:]
-    return merged, count
+    return merged
 
 
-mergesort([3, 1, 2, 9, 8, 7])
+mergesort([5, 2, 3, 1, 8, 7, 6])
