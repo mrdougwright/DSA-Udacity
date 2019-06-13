@@ -1,69 +1,26 @@
 def case_sort(string):
-    """
-    Here are some pointers on how the function should work:
-    1. Sort the string
-    2. Create an empty output list
-    3. Iterate over original string
-        if the character is lower-case:
-            pick lower-case character from sorted string to place in output list
+    upper_ch_index = 0
+    lower_ch_index = 0
+
+    sorted_string = sorted(string)
+    for index, character in enumerate(sorted_string):
+        # check if character is lower-case
+        ascii_int = ord(character)
+        if 97 <= ascii_int <= 122:  # ASCII value of a = 97 & ASCII value of z = 122
+            lower_ch_index = index
+            break
+
+    output = list()
+    for character in string:
+        ascii_int = ord(character)
+        # if character is lower case pick next lower_case character
+        if 97 <= ascii_int <= 122:
+            output.append(sorted_string[lower_ch_index])
+            lower_ch_index += 1
         else:
-            pick upper-case character from sorted string to place in output list
-
-    Note: You can use Python's inbuilt ord() function to find the ASCII value of a character
-    """
-    lower = []
-    upper = []
-    output = ""
-    for char in string:
-        if ord(char) > 96:
-            lower.append(char)
-        else:
-            upper.append(char)
-
-    lower = merge_sort(lower)
-    lower.reverse()
-    upper = merge_sort(upper)
-    upper.reverse()
-
-    for char in string:
-        if ord(char) > 96:
-            output += output.join(lower.pop())
-        else:
-            output += output.join(upper.pop())
-
-    return output
-
-
-def merge_sort(items):
-    if len(items) <= 1:
-        return items
-
-    mid_index = len(items) // 2
-    left = items[:mid_index]
-    right = items[mid_index:]
-
-    left = merge_sort(left)
-    right = merge_sort(right)
-
-    return merge(left, right)
-
-
-def merge(left, right):
-    merged = []
-    left_index = 0
-    right_index = 0
-
-    while left_index < len(left) and right_index < len(right):
-        if left[left_index] > right[right_index]:
-            merged.append(right[right_index])
-            right_index += 1
-        else:
-            merged.append(left[left_index])
-            left_index += 1
-
-    merged += left[left_index:]
-    merged += right[right_index:]
-    return merged
+            output.append(sorted_string[upper_ch_index])
+            upper_ch_index += 1
+    return "".join(output)
 
 
 def test_function(test_case):
