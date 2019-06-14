@@ -7,19 +7,7 @@ def sqrt(number):
     Returns:
        int: Floored Square Root
     """
-    if number == 0 or number == 1:
-        return number
-
-    nums = list(range(1, number))
-    previous = None
-
-    for num in nums:
-        square_root = num * num
-        if square_root > number:
-            return previous
-        elif square_root == number:
-            return num
-        previous = num
+    return int(number ** 0.5)
 
 
 print("Pass" if (3 == sqrt(9)) else "Fail")
