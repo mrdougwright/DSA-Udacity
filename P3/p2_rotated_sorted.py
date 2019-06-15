@@ -47,23 +47,14 @@ def test_function(test_case):
         print("Fail")
 
 
+print(rotated_array_search([6, 7, 8, 9, 10, 1, 2, 3, 4], 6))  # 0
+print(rotated_array_search([6, 7, 8, 9, 10, 1, 2, 3, 4], 1))  # 5
+print(rotated_array_search([6, 7, 8, 1, 2, 3, 4], 8))  # 2
+print(rotated_array_search([6, 7, 8, 1, 2, 3, 4], 1))  # 3
+print(rotated_array_search([6, 7, 8, 1, 2, 3, 4], 10))  # -1
+
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
-
-
-"""
-First we traverse through the rotated sorted array to find the "middle" index
-where the array was rotated. We use that found index to determine which half of
-the array to start our pivot search. From here, we simply increment up or down
-until we find the matching number. If at any point our pivot is at 0, equal to the
-index, or larger than the list, we haven't found the number and we return -1.
-
-The space complexity is O(1) because we only create placeholder variables with
-no extra collections to perform our logic.
-
-Time complexity is O(log n) because at worst case we search through half of half
-of an array.
-"""

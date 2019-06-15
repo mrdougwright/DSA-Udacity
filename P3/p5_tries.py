@@ -75,24 +75,7 @@ wordList = [
 for word in wordList:
     MyTrie.insert(word)
 
-"""
-This version differs slightly from the notebook, where you can gather suffixes
-by sending in an explicit node. For example:
->>> MyTrie.root.suffixes("a")
-['nthology', 'ntagonist', 'ntonym']
-
-Finding all the suffixes in a given Trie Dictionary was a tricky recursion problem.
-First, I knew that my main `suffixes` function would call a secondary recursive
-function: _merge_suffixes. Inside this function, I create a new empty list. Then
-if the node has children, I iterate through it's items (a char and a node). For
-each of these iterations, I call the function again, appending the list with the
-char and the returned partial array list form _merge_suffixes.
-
-As the call stack resolves, the elements from each _merge_suffixes' call get
-appended to the char in the for loop, working their way back up so that all suffixes
-are returned in a list.
-
-Space complexity is O(n), since we create a new array for every node in children.
-Time complexity is also O(n), since we traverse all children while building the
-suffixes.
-"""
+print(MyTrie.root.suffixes("a"))  # ['nthology', 'ntagonist', 'ntonym']
+print(MyTrie.root.suffixes("b"))  # None
+print(MyTrie.root.suffixes("f"))  # ['unction', 'actory']
+print(MyTrie.root.suffixes("t"))  # ['rie', 'rigger', 'rigonometry', 'ripod']

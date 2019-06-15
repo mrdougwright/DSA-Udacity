@@ -62,19 +62,8 @@ def test_function(test_case):
 
 
 test_function([[1, 2, 3, 4, 5], [542, 31]])
-test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
 
-
-"""
-To rearrange a list of digits into two large numbers I first
-reverse merge sort the list. Merge sort time complexity is O(n log(n))
-and puts the largest number at the front of the list. Then I simply
-iterate through the numbers, taking turns to place one in either list1 or list2,
-and converting them to strings as the numbers are added to a list.
-Finally, I join the list of strings and convert to ints.
-
-The time complexity is O(2n log(n)) because we iterate through the list after
-it's merged, which simplifies to O(n log(n)). The space complexity of merge sort
-is O(n) with two lists created again after merging for a total of O(3n), simplified
-to O(n).
-"""
+print(rearrange_digits([4, 6, 2, 5, 9, 8]))  # [964, 852]]
+print(rearrange_digits([2, 1]))  # [2, 1]
+print(rearrange_digits([2, 1, 9, 7, 8]))  # [971, 82]
+print(rearrange_digits([8, 7, 6, 4, 2, 1]))  # [862, 741]
