@@ -8,25 +8,39 @@ class TrieNode:
         ## Add a child node in this Trie
         self.children[char] = TrieNode()
 
-    def suffixes(self, suffix=""):
-        ## Recursive function that collects the suffix for
-        ## all complete words below this point
-        if suffix in self.children:
-            return self._merge_suffixes(self.children[suffix])
-        else:
-            return None
+    def suffixes(self, prefix=""):
+        # ensure prefix exists
+        index = 0
+        node = self
+        while index < len(prefix):
+            char = prefix[index]
+            if char not in node.children:
+                return -1
+            index += 1
+            node = node.children[char]
 
-    def _merge_suffixes(self, node):
-        my_list = []
+        return self._merge_words(node, [])
 
-        if len(node.children) is not 0:
-            for char, node in node.children.items():
-                for el in self._merge_suffixes(node):
-                    my_list.append(char + el)
-        else:
-            my_list.append("")
+    def _merge_words(self, node, words):
+        word = ""
+        root_node = node
 
-        return my_list
+        while len(node.children) >= 0:
+            if len(node.children) > 0:
+                char = next(iter(node.children.keys()))
+
+            if node.is_word:
+                node.is_word = False
+                words.append(word)
+                node = root_node
+                word = ""
+            elif len(node.children) > 0:
+                word += char
+                node = node.children[char]
+            else:
+                break
+
+        return words
 
 
 ## The Trie itself containing the root node and insert/find functions
@@ -75,7 +89,7 @@ wordList = [
 for word in wordList:
     MyTrie.insert(word)
 
-print(MyTrie.root.suffixes("a"))  # ['nthology', 'ntagonist', 'ntonym']
-print(MyTrie.root.suffixes("b"))  # None
-print(MyTrie.root.suffixes("f"))  # ['unction', 'actory']
+print(MyTrie.root.suffixes("f"))  # ['nthology', 'ntagonist', 'ntonym']
+print(MyTrie.root.suffixes("b"))  # -1
+print(MyTrie.root.suffixes("fu"))  # ['unction', 'actory']
 print(MyTrie.root.suffixes("t"))  # ['rie', 'rigger', 'rigonometry', 'ripod']

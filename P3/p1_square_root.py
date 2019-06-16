@@ -8,6 +8,11 @@ def sqrt(number):
        int: Floored Square Root
     """
     # return int(number ** 0.5)
+    if number is None:
+        return 0
+
+    if number < 0:
+        return 0
 
     if number == 0 or number == 1:
         return number
@@ -27,6 +32,8 @@ def sqrt(number):
         return nums[index - 1]
 
 
+print(sqrt(None))  # 0
+print(sqrt(-7))  # 0
 print(sqrt(0))  # 0
 print(sqrt(1))  # 1
 print(sqrt(9))  # 3

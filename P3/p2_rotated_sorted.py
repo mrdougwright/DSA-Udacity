@@ -10,6 +10,10 @@ def rotated_array_search(input_list, number):
     index = 0
     while input_list[index] < input_list[index + 1]:
         index += 1
+        if index + 1 == len(input_list):
+            # catch for sorted arrays
+            index = len(input_list) // 2
+            break
     index += 1
 
     if number in input_list[:index]:
@@ -58,3 +62,5 @@ test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+test_function([[6, 7, 8, 9, 10, 11, 12], 10])
+test_function([[6, 7, 8, 9, 10, 11, 12], 13])
