@@ -9,38 +9,15 @@ class TrieNode:
         self.children[char] = TrieNode()
 
     def suffixes(self, prefix=""):
-        # ensure prefix exists
-        index = 0
-        node = self
-        while index < len(prefix):
-            char = prefix[index]
-            if char not in node.children:
-                return -1
-            index += 1
-            node = node.children[char]
+        generated = self._generate_suffixes(prefix)
+        return ",".join(generated)
 
-        return self._merge_words(node, [])
+    def _generate_suffixes(self, prefix):
+        if self.is_word:
+            yield prefix
 
-    def _merge_words(self, node, words):
-        word = ""
-        root_node = node
-
-        while len(node.children) >= 0:
-            if len(node.children) > 0:
-                char = next(iter(node.children.keys()))
-
-            if node.is_word:
-                node.is_word = False
-                words.append(word)
-                node = root_node
-                word = ""
-            elif len(node.children) > 0:
-                word += char
-                node = node.children[char]
-            else:
-                break
-
-        return words
+        for char, node in self.children.items():
+            yield from node._generate_suffixes(prefix + char)
 
 
 ## The Trie itself containing the root node and insert/find functions
@@ -89,7 +66,7 @@ wordList = [
 for word in wordList:
     MyTrie.insert(word)
 
-print(MyTrie.root.suffixes("f"))  # ['nthology', 'ntagonist', 'ntonym']
-print(MyTrie.root.suffixes("b"))  # -1
-print(MyTrie.root.suffixes("fu"))  # ['unction', 'actory']
-print(MyTrie.root.suffixes("t"))  # ['rie', 'rigger', 'rigonometry', 'ripod']
+print(MyTrie.find("ant").suffixes())  # ,hology,agonist,onym
+print(MyTrie.find("f").suffixes())  # un,unction,actory
+print(MyTrie.find("t").suffixes())  # rie,rigger,rigonometry,ripod
+print(MyTrie.find("trig").suffixes())  # ger,onometry
