@@ -70,27 +70,17 @@ the array, swapping numbers when applicable.
 
 
 #### Problem 5 - Autocomplete with Tries
-This version differs slightly from the notebook, where you can gather suffixes
-by sending in an explicit node. For example:
-```python
-  MyTrie.root.suffixes("a")
-  ['nthology', 'ntagonist', 'ntonym']
-```
-
 Finding all the suffixes in a given Trie Dictionary was a tricky recursion problem.
-First, I knew that my main `suffixes` function would call a secondary recursive
-function: `_merge_suffixes`. Inside this function, I create a new empty list. Then
-if the node has children, I iterate through it's items (a char and a node). For
-each of these iterations, I call the function again, appending the list with the
-char and the returned partial array list form `_merge_suffixes`.
+But now that I know about Python's yield method, it was much easier!
 
-As the call stack resolves, the elements from each `_merge_suffixes`' call get
-appended to the char in the for loop, working their way back up so that all suffixes
-are returned in a list.
+To generate suffixes, we first call `find` on the Trie class to find our prefix.
+Then, with the returned node, we can call `suffixes` on the TrieNode class. This
+is a simple wrapper to join the yielded result of _generate_suffixes, which uses
+recursion to search all nodes in children and call itself until is_word is True.
 
-Space complexity is O(n), since we create a new array for every node in children.
-Time complexity is also O(n), since we traverse all children while building the
-suffixes.
+Space complexity is O(1), since no new objects are created in memory, besides
+a simple variable `generated`. The time complexity is O(n), since to find all
+the suffixes, we have to traverse all nodes in the tree.
 
 
 #### Problem 6 - Unsorted Integer Array
