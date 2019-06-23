@@ -13,9 +13,8 @@ def get_minimum_cost_of_connecting(num_islands, bridge_config):
 
 
 def minimum_cost(graph):
-    start_vertex = 1
-    visited = [False for _ in range(len(graph) + 1)]
-    heap = [(0, start_vertex)]
+    visited = [False for _ in range(len(graph))]
+    heap = [(0, 1)]
     total_cost = 0
 
     while len(heap) > 0:
@@ -27,7 +26,7 @@ def minimum_cost(graph):
         total_cost += cost
         print(f"cost, vert: ({cost}, {current_vertex}). n: {graph[current_vertex]}")
 
-        for neighbor, edge_cost in graph[current_vertex]:
+        for edge_cost, neighbor in graph[current_vertex]:
             heapq.heappush(heap, (edge_cost, neighbor))
 
         visited[current_vertex] = True
@@ -39,8 +38,8 @@ def create_graph(num_islands, bridge_config):
     adjacency_list = [list() for _ in range(num_islands + 1)]
 
     for source, destination, cost in bridge_config:
-        adjacency_list[source].append((destination, cost))
-        adjacency_list[destination].append((source, cost))
+        adjacency_list[source].append((cost, destination))
+        adjacency_list[destination].append((cost, source))
 
     print(adjacency_list)
     return adjacency_list
