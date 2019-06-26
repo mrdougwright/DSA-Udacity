@@ -9,3 +9,44 @@ How to solve a problem:
 }
 
 Don't optimize prematurely!
+
+
+Definition of a Problem
+- Initial State
+- Actions(s)
+- Result
+- Goal Test(s)
+
+- Path Cost
+- Step Cost
+
+Example with Problem: flight from Arad to Bucharest
+Initial State: in Arad
+Goal Test: True if in Bucharest
+Actions: Follow path to connected city
+  Arad: 0, Zerind: 1, Sibiu: 1, Rimnicu: 2, etc.
+
+
+Uniform Cost Search (cheapest path first)
+- pick the path with lowest cost
+- keep going and summing subtotal costs
+- explored, frontier, unexplored
+https://www.youtube.com/watch?time_continue=1&v=MoyBcrw-n_M
+
+Uniform Cost search
+- expands out equally in all directions, may expend additional effort getting to a fairly direct path to the goal.
+
+Greedy best-first search
+- expands outward toward locations estimated as closer to the goal. If a direct path is available, expends much less effort than Uniform Cost; however, it does not consider any routes in which it may need to temporarily take a further away path in order to arrive at an overall shorter path.
+
+A* Search
+- utilizes both of these - will try to optimize with both the shortest path and the goal in mind.
+
+
+A* Search
+
+f = g + h
+g(path) = path cost
+h(path) = h(state) = estimated distance to goal
+minimize g: keeps path short
+minimize h: keeps focus on goal
