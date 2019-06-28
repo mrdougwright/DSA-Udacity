@@ -17,9 +17,8 @@ def shortest_path(M, start, goal):
             break
 
         for neighbor in M.roads[node]:
-            estimated = distance(M.intersections[neighbor], M.intersections[goal])
             path_cost = distance(M.intersections[node], M.intersections[neighbor])
-            new_cost = cost_so_far[node] + path_cost + estimated
+            new_cost = cost_so_far[node] + path_cost
 
             if neighbor not in cost_so_far or new_cost < cost_so_far[neighbor]:
                 cost_so_far[neighbor] = new_cost
@@ -49,7 +48,7 @@ def best_route(came_from, start, goal):
 
 # example 1
 map_40 = load_map("map-40.pickle")
-shortest_path(map_40, 8, 24)  # path: [8, 14, 16, 37, 12, 31, 10, 24]
+shortest_path(map_40, 8, 24)  # path: [8, 14, 16, 37, 12, 17, 10, 24]
 # example 2
 map_10 = load_map("map-10.pickle")
 shortest_path(map_10, 2, 0)  # path: [2, 3, 5, 0]
