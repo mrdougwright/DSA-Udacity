@@ -4,34 +4,29 @@ from helpers import Map, load_map, show_map
 
 
 def shortest_path(M, start, goal):
-    visited = []
-    route = []
+    came_from = {}
+    cost_so_far = {}
+    came_from[start] = None
+    cost_so_far[start] = 0
+    frontier = [(0, start)]
 
-    heap = [(0, (start, start))]
+    while len(frontier) > 0:
+        node = heapq.heappop(frontier)[1]
 
-    while len(heap) > 0:
-        cost, (prev_dest, destination) = heapq.heappop(heap)
+        if node == goal:
+            break
 
-        if destination in visited:
-            continue
-
-        route.append((prev_dest, destination))
-        visited.append(destination)
-
-        if destination == goal:
-            return print_route(route)
-
-        prev_path_cost = distance(
-            M.intersections[prev_dest], M.intersections[destination]
-        )
-        for neighbor in M.roads[destination]:
-            path_cost = prev_path_cost + distance(
-                M.intersections[destination], M.intersections[neighbor]
-            )
+        for neighbor in M.roads[node]:
             estimated = distance(M.intersections[neighbor], M.intersections[goal])
-            heapq.heappush(heap, (path_cost + estimated, (destination, neighbor)))
+            path_cost = distance(M.intersections[node], M.intersections[neighbor])
+            new_cost = cost_so_far[node] + path_cost + estimated
 
-    return print_route(route)
+            if neighbor not in cost_so_far or new_cost < cost_so_far[neighbor]:
+                cost_so_far[neighbor] = new_cost
+                heapq.heappush(frontier, (new_cost, neighbor))
+                came_from[neighbor] = node
+
+    return best_route(came_from, start, goal)
 
 
 def distance(start, end):
@@ -39,20 +34,22 @@ def distance(start, end):
     return math.hypot(end[0] - start[0], end[1] - start[1])
 
 
-def print_route(route):
-    prev, next = route.pop(0)
-    best_path = [next]
-    while len(route) > 0:
-        prev, next = route.pop(0)
-        if best_path[-1] == prev:
-            best_path.append(next)
-    print(best_path)
-    return best_path
+def best_route(came_from, start, goal):
+    # traverse backwards to find optimal path
+    node = goal
+    path = []
+    while node != start:
+        path.append(node)
+        node = came_from[node]
+    path.append(start)
+    path.reverse()
+    print(path)
+    return path
 
 
-# works:
+# example 1
 map_40 = load_map("map-40.pickle")
-shortest_path(map_40, 5, 34)  # path: [5, 16, 37, 12, 34]
-# works!:
+shortest_path(map_40, 8, 24)  # path: [8, 14, 16, 37, 12, 31, 10, 24]
+# example 2
 map_10 = load_map("map-10.pickle")
 shortest_path(map_10, 2, 0)  # path: [2, 3, 5, 0]
