@@ -21,9 +21,9 @@ def shortest_path(M, start, goal):
             new_cost = cost_so_far[node] + path_cost
 
             if neighbor not in cost_so_far or new_cost < cost_so_far[neighbor]:
+                came_from[neighbor] = node
                 cost_so_far[neighbor] = new_cost
                 heapq.heappush(frontier, (new_cost, neighbor))
-                came_from[neighbor] = node
 
     return best_route(came_from, start, goal)
 
@@ -37,6 +37,11 @@ def best_route(came_from, start, goal):
     # traverse backwards to find optimal path
     node = goal
     path = []
+
+    if node not in came_from:
+        print(f"Node: {node} not found in map.")
+        return
+
     while node != start:
         path.append(node)
         node = came_from[node]
@@ -46,9 +51,12 @@ def best_route(came_from, start, goal):
     return path
 
 
-# example 1
+# test maps
+map_10 = load_map("map-10.pickle")
 map_40 = load_map("map-40.pickle")
+# example 1
 shortest_path(map_40, 8, 24)  # path: [8, 14, 16, 37, 12, 17, 10, 24]
 # example 2
-map_10 = load_map("map-10.pickle")
 shortest_path(map_10, 2, 0)  # path: [2, 3, 5, 0]
+# example 3
+shortest_path(map_10, 3, 9)
